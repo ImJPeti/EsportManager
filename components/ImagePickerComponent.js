@@ -1,7 +1,7 @@
 import * as ImagePicker from "expo-image-picker";
 import { element } from "prop-types";
 import React, { useState, useEffect } from "react";
-import { Button, Image, View, Text } from "react-native";
+import { Button, Image, View, Text, StyleSheet } from "react-native";
 
 
 function ImagePickerComponent({ onSubmit }) {
@@ -25,29 +25,45 @@ function ImagePickerComponent({ onSubmit }) {
       let data = responseData.text.split("\n")
       for (let i = 0; i < data.length; i++){
         if (data[i].match(regex)) {
-          console.log(data[i])
           let score = data[i].split("-");
           setScoreOne("Player one: "+ score[0]);
-          console.log(scoreOne)
-          setScoreTwo("Player Two:" + score[1])
+          setScoreTwo("Player Two: "+ score[1])
         }
       }
     }
   };
     return (
-    <View>
-      <Button title="Pick an image from camera roll" onPress={pickImage} />
-      {image && (
-        <Image
-          source={{ uri: image }}
-          style={{ width: 200, height: 300, resizeMode: "contain" }}
-        />
-        )}
-        <View>
-          <Text>{scoreOne}</Text>
-          <Text>{scoreTwo}</Text>
+      <View style={{position: "relative", minHeight: 150}}>
+        {image && <Image source={{ uri: image }} style={styles.image} />}
+        <View style={styles.scores}>
+          <Text style={{padding: 10, margin: 10}}>{scoreOne}</Text>
+          <Text style={{padding: 10, margin: 10}}>{scoreTwo}</Text>
         </View>
-    </View>
-  );
+        <View style={styles.pickImage}>
+          <Button title="Pick an image from camera roll" onPress={pickImage} />
+        </View>
+      </View>
+    );
 }
 export default ImagePickerComponent;
+const styles = StyleSheet.create({
+  image: {
+    marginTop: 30,
+    width: "100%",
+    height: 300,
+    resizeMode: "cover",
+    backgroundColor: "black",
+    borderRadius: 10
+  },
+  scores: {
+    marginTop: 50,
+    display: "flex",
+    flexDirection: "row",
+    padding: 10,
+    rowGap: 30,
+  },
+  pickImage: {
+    marginTop: 100,
+    position: "fixed",
+  }
+});
