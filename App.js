@@ -7,7 +7,7 @@ import NavBar from './components/navBar.js';
 export default function App() {
   return (
     <View style={styles.container}>
-      {/*  <Camera />*/}
+      <Camera />
       <StatusBar style="auto" />
       <NavBar />
     </View>

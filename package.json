@@ -11,6 +11,8 @@
   "dependencies": {
     "@expo/vector-icons": "^13.0.0",
     "@react-navigation/core": "^6.4.7",
+    "@react-navigation/native": "^6.1.5",
+    "@react-navigation/native-stack": "^6.9.11",
     "expo": "~48.0.4",
     "expo-image-picker": "^14.1.1",
     "expo-status-bar": "~1.4.4",
