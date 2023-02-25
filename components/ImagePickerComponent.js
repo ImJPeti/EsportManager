@@ -9,6 +9,9 @@ function ImagePickerComponent({ onSubmit }) {
   const [text, setText] = useState("Please add an image");
   const [scoreOne, setScoreOne] = useState(null);
   const [scoreTwo, setScoreTwo] = useState(null);
+  const [playerOne, setPlayerOne] = useState(null);
+  const [playerTwo, setPlayerTwo] = useState(null);
+
   const regex = /^[0-9]\-[0-9]$/gm;
 
   const pickImage = async () => {
@@ -22,6 +25,7 @@ function ImagePickerComponent({ onSubmit }) {
       setText("Loading..");
       const responseData = await onSubmit(result.base64);
       setText(responseData.text);
+      console.log(responseData.text);
       let data = responseData.text.split("\n")
       for (let i = 0; i < data.length; i++){
         if (data[i].match(regex)) {
@@ -36,8 +40,8 @@ function ImagePickerComponent({ onSubmit }) {
       <View style={{position: "relative", minHeight: 150}}>
         {image && <Image source={{ uri: image }} style={styles.image} />}
         <View style={styles.scores}>
-          <Text style={{padding: 10, margin: 10}}>{scoreOne}</Text>
-          <Text style={{padding: 10, margin: 10}}>{scoreTwo}</Text>
+          <Text style={{padding: 10, margin: 10, color: "white"}}>{scoreOne}</Text>
+          <Text style={{padding: 10, margin: 10, color: "white"}}>{scoreTwo}</Text>
         </View>
         <View style={styles.pickImage}>
           <Button title="Pick an image from camera roll" onPress={pickImage} />
